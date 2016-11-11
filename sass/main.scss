@@ -1,0 +1,28 @@
+@import "./fonts";
+@import "./variables";
+@import "./utils";
+
+body {
+  background: $backgroundColor;
+  color: $colorLight;
+  font-family: $defaultFont;
+}
+
+.carousel-container {
+  margin: 0;
+  padding: 60px 0;
+}
+
+.form-header {
+  padding: 40px 0;
+  background-color: $colorAccent;
+  background: linear-gradient(to top, $colorAccentDark 0%, $colorAccent 5%, $colorAccent 95%,$colorAccentDark 100%);
+
+  font-size: $headerSize;
+  font-family: $headerFont;
+
+  & > .h3 {
+    font-weight: 300;
+    margin: 0;
+  }
+}

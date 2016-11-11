@@ -1,0 +1,47 @@
+@font-face {
+  font-family: PT;
+  src: url("../fonts/PTS55F.ttf"); }
+
+@font-face {
+  font-family: PT;
+  font-style: italic;
+  src: url("../fonts/PTS56F.ttf"); }
+
+@font-face {
+  font-family: PT;
+  font-weight: bold;
+  src: url("../fonts/PTS75F.ttf"); }
+
+@font-face {
+  font-family: PT;
+  font-weight: bold;
+  font-style: italic;
+  src: url("../fonts/PTS76F.ttf"); }
+
+.page-width {
+  width: 1024px; }
+
+.placeholder {
+  color: #5b5754; }
+
+.text-center {
+  text-align: center; }
+
+body {
+  background: #242020;
+  color: #fff7ef;
+  font-family: Arial, sans; }
+
+.carousel-container {
+  margin: 0;
+  padding: 60px 0; }
+
+.form-header {
+  padding: 40px 0;
+  background-color: #f78f20;
+  background: linear-gradient(to top, #804b13 0%, #f78f20 5%, #f78f20 95%, #804b13 100%);
+  font-size: 48px;
+  font-family: PT, sans; }
+  .form-header > .h3 {
+    font-weight: 300;
+    margin: 0; }
