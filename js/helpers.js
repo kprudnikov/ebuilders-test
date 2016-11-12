@@ -33,3 +33,26 @@ function extend (to, from) {
 
   return to;
 }
+
+function hasClass (element, className) {
+  var classesString = " " + element.className + " ";
+  return classesString.indexOf(className) > -1;
+}
+
+function addClass (element, className) {
+  if (!hasClass(element, className)) {
+    element.className = (element.className + ' ' + className).trim();
+  }
+
+  return element;
+}
+
+function removeClass (element, className) {
+  if (hasClass(element, className)) {
+    element.className = element.className.replace(className, '').trim();
+  }
+}
+
+function toggleClass (element, className) {
+
+}

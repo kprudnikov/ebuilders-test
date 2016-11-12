@@ -2,9 +2,11 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
+
 // const concat = require('gulp-concat');
 const watch = require('gulp-watch');
-var del = require('del');
+const del = require('del');
+const copy = require('gulp-copy');
 
 gulp.task('sass', function () {
   return gulp.src('./sass/main.scss')
@@ -13,7 +15,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('sass/**/*.scss', ['autoprefix']);
+  gulp.watch('sass/**/*.scss', ['autoprefix', 'del']);
 });
 
 gulp.task('autoprefix', ['sass'], () => {
@@ -24,7 +26,18 @@ gulp.task('autoprefix', ['sass'], () => {
         .pipe(gulp.dest('css'))
 });
 
-gulp.task('default', ['sass', 'autoprefix','watch']);
+gulp.task('copy', () => {
+  return gulp.src('sass/PIE.htc')
+    .pipe(copy('css', {prefix: 1}));
+});
+
+gulp.task('del', () => {
+  return del('sass/main.css');
+  // return gulp.src()
+    // .pipe(del());
+})
+
+gulp.task('default', ['sass', 'autoprefix', 'copy', 'del', 'watch']);
 
 // gulp.task('stream', function () {
 //     // Endless stream mode
