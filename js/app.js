@@ -3,7 +3,9 @@
 
   var carouselContainer = document.getElementById('carousel');
   var carousel = new Carousel(carouselContainer, {
-    pagination: '.pagination-container'
+    containerClass: 'slides-container',
+    wrapperClass: 'slides-wrapper',
+    paginationClass: 'pagination-container'
   });
 
 })();

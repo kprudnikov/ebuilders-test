@@ -17,11 +17,21 @@ function getWidth (node) {
 }
 
 function toArray (list) {
-  return Array.prototype.slice.call(list);
+  var ar = [];
+  // console.log(list.length);
+  for (var i=0; i<list.length; i++) {
+    console.log(i);
+    console.log(list[i]);
+    ar.push(list[i]);
+  }
+
+  // console.log(ar);
+  return ar;
+  // return Array.prototype.slice.call(list);
 }
 
 function hasTransitions () {
-  return true;
+  return false;
 }
 
 function extend (to, from) {

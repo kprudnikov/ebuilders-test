@@ -1,8 +1,9 @@
 var Carousel = (function () {
   'use strict';
 
-  function Carousel (container, config) {
+  function Carousel (mainContainer, config) {
     var defaultConfig = {
+      containerClass: 'carousel-container',
       wrapperClass: 'carousel-wrapper',
       slideClass: 'slide',
       backwards: false,
@@ -11,35 +12,37 @@ var Carousel = (function () {
       onStop: noop,
       onSlideChange: noop,
       paginationHide: true,
-      pagination: '.pagination',
+      paginationClass: 'pagination',
       paginationBulletClass: 'pagination-bullet',
-      activeBulletClass: 'active'
+      activeBulletClass: 'active',
+      contolerButtonClass: 'carousel-control',
+      nextButtonClass: 'carousel-next',
+      prevButtonClass: 'carousel-prev',
     };
 
     if (toString(config) !== 'object') {
       config = {};
     }
 
-    if (typeof container !== 'string') {
-      this.container = container;
+    // console.log(this);
+    // console.log(mainContainer);
+    // console.log('toString(mainContainer)');
+    // console.log(toString(mainContainer));
+    if (toString(mainContainer).match(/html/i) || toString(mainContainer).match(/object/i)) {
+      this.container = mainContainer;
+    } else if (typeof mainContainer !== 'string') {
+      console.log('container is string');
+      this.container = document.querySelector(mainContainer);
     } else {
-      this.container = document.querySelector(container);
+      throw new TypeError('Carousel container must be either a dom element or a selector string');
     }
 
     this.config = extend(config, defaultConfig);
-    this.paginationContainer = null;
     this.bullets = [];
-
-    if (this.config.pagination) {
-      if (toString(this.config.pagination) === 'string') {
-        this.paginationContainer = this.container.querySelector(this.config.pagination);
-      } else {
-        this.paginationContainer = this.pagination;
-      }
-    }
-
+    this.paginationContainer = this.container.querySelector('.'+this.config.paginationClass);
     this.timer = 0;
-    this.slideWidth = getWidth(this.container);
+    this.carouselContainer = this.container.querySelector('.'+this.config.containerClass);
+    this.slideWidth = getWidth(this.carouselContainer);
     this.wrapper = this.container.querySelector('.'+this.config.wrapperClass);
     this.slides = toArray(this.container.querySelectorAll('.'+this.config.slideClass));
     this.currentSlideIndex = 0;
@@ -48,7 +51,7 @@ var Carousel = (function () {
 
     this.init();
     this.start();
-    if (this.config.pagination) {
+    if (this.paginationContainer) {
       this.addPaginationBullets(this.slides, this.paginationContainer, this.config.paginationBulletClass, this.config.activeBulletClass); // array, container, class, activeClass
     }
   }
@@ -57,13 +60,13 @@ var Carousel = (function () {
     var self = this;
     self.wrapper.style.width = (self.slideWidth*self.slides.length) + 'px';
 
-    addEvent(self.container, 'mouseenter', function () {
+    addEvent(self.wrapper, 'mouseenter', function () {
       if (self.isRunning) {
         self.stop();
       }
     });
 
-    addEvent(self.container, 'mouseleave', function () {
+    addEvent(self.wrapper, 'mouseleave', function () {
       self.willStop = false;
 
       if (!self.isRunning) {
@@ -98,7 +101,7 @@ var Carousel = (function () {
 
     self.config.onStart();
 
-    if (hasTransitions) {
+    // if (hasTransitions()) {
       self.timer = setInterval(function () {
         if (self.isRunning && !self.willStop) {
           var previousIndex = self.currentSlideIndex;
@@ -116,9 +119,9 @@ var Carousel = (function () {
           self.config.onStop();
         }
       }, self.config.speed)
-    } else {
-      console.log('no transitions no fun');
-    }
+    // } else {
+      // console.log('no transitions no fun');
+    // }
   };
 
   Carousel.prototype.stop = function() {
@@ -142,7 +145,6 @@ var Carousel = (function () {
       self.bullets.push(bullet);
     });
 
-
     paginationContainer.appendChild(bullets);
   };
 
@@ -152,7 +154,14 @@ var Carousel = (function () {
     addClass(this.bullets[nextIndex], 'active');
 
     this.config.onSlideChange(nextIndex, slides[nextIndex]);
-    this.wrapper.style.transform = 'translateX(' + direction + this.slideWidth * nextIndex + 'px)';
+
+    if (hasTransitions()) {
+      this.wrapper.style.transform = 'translateX(' + direction + this.slideWidth * nextIndex + 'px)';
+    } else {
+      this.wrapper.style.position = 'absolute';
+      this.wrapper.style.left = direction + this.slideWidth * nextIndex + 'px';
+    }
+
   };
 
   function noop () {};
