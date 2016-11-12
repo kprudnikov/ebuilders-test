@@ -8,62 +8,225 @@ body {
   font-family: $defaultFont;
 }
 
-.carousel-container {
-  margin: 60px auto;
-  overflow: hidden;
-  height: 539px;
-  width: 806px;
-  padding-bottom: 60px;
+button, input[type=submit] {
+  font-family: $defaultFont;
+}
 
-  & > .carousel-wrapper {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    transition: transform 0.5s;
-  }
+.carousel-main-container {
+    width: 806px;
+    padding: 60px 0;
 
-  .slide {
-    float: left;
-  }
+  & > .slides-container {
+    height: 539px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
 
-  img {
-    display: block;
-    margin: 0;
-    padding: 0;
+    & > .slides-wrapper {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      left: 0;
+      transition: transform 0.5s, left 0.5s;
+    }
+
+    .slide {
+      float: left;
+    }
+
+    img {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
   }
 
   & > .pagination-container {
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
     text-align: center;
-    padding-top: 12px;
+
     & > .pagination-bullet {
       height: 20px;
       width: 20px;
       background: $colorDisabled;
       @include border-radius(20px);
       border: none;
+      cursor: pointer;
+
       &.active {
         background: $colorLight;
       }
 
       & + .pagination-bullet {
         margin-left: 8px;
-
       }
+    }
+  }
+
+  .carousel-control {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    top: 270px;
+    @include border-radius(100%);
+    border: none;
+    background: $colorDisabled;
+    font-family: $headerFont;
+    font-size: 35px;
+    cursor: pointer;
+
+    &:hover {
+      background: $colorLight;
+    }
+
+    &.carousel-next {
+      right: -35px;
+      text-align: right;
+      padding-right: 12px;
+    }
+
+    &.carousel-prev {
+      left: -35px;
+      text-align: left;
+      padding-left: 12px;
     }
   }
 }
 
 .form-header {
-  padding: 40px 0;
+  display: block;
+  padding: 35px 0;
+  margin-bottom: 60px;
   background-color: $colorAccent;
   background: linear-gradient(to top, $colorAccentDark 0%, $colorAccent 5%, $colorAccent 95%,$colorAccentDark 100%);
 
   font-size: $headerSize;
+  line-height: $headerSize;
   font-family: $headerFont;
 
   & > .h3 {
     font-weight: 300;
     margin: 0;
     letter-spacing: 0.5px;
+  }
+}
+
+.contact-form {
+  width: $formWidth;
+  background: $secondaryBackgroundColor;
+  padding: 40px;
+  padding-bottom: 305px;
+  @include border-radius(10px);
+  overflow: hidden;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  font-size: $fontSize;
+  font-weight: 300;
+}
+
+.label-wrapper, .input-wrapper {
+  float: left;
+}
+
+.label-wrapper {
+  width: 31%;
+  box-sizing: border-box;
+  padding-top: 10px;
+  padding-left: 25px;
+}
+
+.input-wrapper {
+  width: 68%;
+  position: relative;
+
+  @mixin input-style () {
+    padding: 10px 20px;
+    background: $inputBackgroundColor;
+    color: $colorLight;
+    border: 1px solid $inputBackgroundColor;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  & > .form-input {
+    @include input-style();
+
+    position: relative;
+    width: 100%;
+    @include border-radius(10px);
+    resize: none;
+    overflow: hidden;
+
+    & + .placeholder {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      z-index: 1;
+      color: $placeholderColor;
+    }
+
+    &:focus + .placeholder {
+      display: none;
+    }
+
+    &.invalid {
+      border-color: red;
+    }
+
+    & > select {
+      @include input-style();
+
+      width: 120%;
+      appearance: none;
+    }
+
+    &.input-select {
+      padding: 0;
+
+      &::after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        height: 0;
+        width: 0;
+        top: 45%;
+        right: 20px;
+        border-top: 8px solid $selectBulletColor;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+      }
+    }
+  }
+
+  & > textarea {
+    height: 150px;
+  }
+} // input-wrapper
+
+.form-submit {
+  position: absolute;
+  right: -72px;
+  bottom: -60px;
+  display: block;
+  height: 195px;
+  width: 200px;
+  text-transform: uppercase;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 -2px 4px 0 #000;
+  text-align: left;
+  font-size: $fontSize;
+  color: $colorLight;
+  background: $submitColorFrom;
+  background: linear-gradient(to bottom, $submitColorFrom 0%, $submitColorTo 100%);
+
+  & > span {
+    position: absolute;
+    left: 30%;
+    top: 30%;
   }
 }

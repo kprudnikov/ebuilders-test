@@ -1,5 +1,5 @@
 .page-width {
-  width: $minWidth;
+  min-width: $minWidth;
 }
 
 .placeholder {
@@ -35,7 +35,15 @@
   border: 0;
 }
 
+.wrapper {
+  position: relative;
+}
+
+.hide {
+  display: none;
+}
+
 @mixin border-radius ($radius) {
-  behavior: 'PIE.htc';
+  behavior: url("./PIE.htc");
   border-radius: $radius;
 }
