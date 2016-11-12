@@ -18,34 +18,38 @@ var Carousel = (function () {
       contolerButtonClass: 'carousel-control',
       nextButtonClass: 'carousel-next',
       prevButtonClass: 'carousel-prev',
+      supportsTransform: false
     };
 
     if (toString(config) !== 'object') {
       config = {};
     }
 
-    // console.log(this);
-    // console.log(mainContainer);
-    // console.log('toString(mainContainer)');
-    // console.log(toString(mainContainer));
     if (toString(mainContainer).match(/html/i) || toString(mainContainer).match(/object/i)) {
       this.container = mainContainer;
     } else if (typeof mainContainer !== 'string') {
-      console.log('container is string');
       this.container = document.querySelector(mainContainer);
     } else {
       throw new TypeError('Carousel container must be either a dom element or a selector string');
     }
 
     this.config = extend(config, defaultConfig);
+
+    // elements
     this.bullets = [];
     this.paginationContainer = this.container.querySelector('.'+this.config.paginationClass);
-    this.timer = 0;
     this.carouselContainer = this.container.querySelector('.'+this.config.containerClass);
-    this.slideWidth = getWidth(this.carouselContainer);
     this.wrapper = this.container.querySelector('.'+this.config.wrapperClass);
     this.slides = toArray(this.container.querySelectorAll('.'+this.config.slideClass));
-    this.currentSlideIndex = 0;
+    this.nextButton = this.container.querySelector('.' + this.config.nextButtonClass);
+    this.prevButton = this.container.querySelector('.' + this.config.prevButtonClass);
+
+    // data
+    this.timer = 0;
+    this.slideWidth = getWidth(this.carouselContainer);
+
+    //state
+    this.currentSlideIndex = this.config.backwards ? this.slides.length - 1 : 0;
     this.isRunning = false;
     this.willStop = false;
 
@@ -59,6 +63,16 @@ var Carousel = (function () {
   Carousel.prototype.init = function() {
     var self = this;
     self.wrapper.style.width = (self.slideWidth*self.slides.length) + 'px';
+    self.config.supportsTransform = hasTransform();
+
+    if (self.config.backwards) {
+      if (self.config.supportsTransform) {
+        self.wrapper.style.transform = 'translateX(-' + self.slideWidth * self.currentSlideIndex + 'px)';
+      } else {
+        self.wrapper.style.position = 'absolute';
+        self.wrapper.style.left = '-' + self.slideWidth * self.currentSlideIndex + 'px';
+      }
+    }
 
     addEvent(self.wrapper, 'mouseenter', function () {
       if (self.isRunning) {
@@ -72,6 +86,18 @@ var Carousel = (function () {
       if (!self.isRunning) {
         self.start();
       }
+    });
+
+    addEvent(self.nextButton, 'click', function () {
+      _stop(self);
+      self.goNext();
+      self.start();
+    });
+
+    addEvent(self.prevButton, 'click', function () {
+      _stop(self);
+      self.goBack();
+      self.start();
     });
 
     addEvent(self.paginationContainer, 'click', function (event) {
@@ -100,28 +126,18 @@ var Carousel = (function () {
     self.willStop = false;
 
     self.config.onStart();
-
-    // if (hasTransitions()) {
-      self.timer = setInterval(function () {
-        if (self.isRunning && !self.willStop) {
-          var previousIndex = self.currentSlideIndex;
-          var nextIndex;
-          if (previousIndex >= self.slides.length-1) {
-            nextIndex = 0;
-          } else {
-            nextIndex = self.currentSlideIndex + 1;
-          }
-
-          self.goToSlide(self.slides, nextIndex, previousIndex);
-          self.currentSlideIndex = nextIndex;
+    self.timer = setInterval(function () {
+      if (self.isRunning && !self.willStop) {
+        if (self.config.backwards) {
+          self.goBack();
         } else {
-          _stop(self);
-          self.config.onStop();
+          self.goNext();
         }
-      }, self.config.speed)
-    // } else {
-      // console.log('no transitions no fun');
-    // }
+      } else {
+        _stop(self);
+        self.config.onStop();
+      }
+    }, self.config.speed)
   };
 
   Carousel.prototype.stop = function() {
@@ -135,7 +151,9 @@ var Carousel = (function () {
       var bullet = document.createElement('button');
       var span = document.createElement('span');
       var bulletText = 'Go to slide ' + (index + 1);
-      bullet.className = index === 0 ? bulletClass + ' ' + activeClass : bulletClass;
+      var activeIndex = self.config.backwards ? slidesArray.length - 1 : 0;
+
+      bullet.className = index === activeIndex ? bulletClass + ' ' + activeClass : bulletClass;
       bullet.setAttribute('title', bulletText);
       bullet.setAttribute('data-index', index);
       span.className = 'sr-only';
@@ -149,19 +167,35 @@ var Carousel = (function () {
   };
 
   Carousel.prototype.goToSlide = function(slides, nextIndex, previousIndex) {
-    var direction = this.config.backwards ? '' : '-';
     removeClass(this.bullets[previousIndex], 'active');
     addClass(this.bullets[nextIndex], 'active');
 
     this.config.onSlideChange(nextIndex, slides[nextIndex]);
 
-    if (hasTransitions()) {
-      this.wrapper.style.transform = 'translateX(' + direction + this.slideWidth * nextIndex + 'px)';
+    if (this.config.supportsTransform) {
+      this.wrapper.style.transform = 'translateX(' + '-' + this.slideWidth * nextIndex + 'px)';
     } else {
       this.wrapper.style.position = 'absolute';
-      this.wrapper.style.left = direction + this.slideWidth * nextIndex + 'px';
+      this.wrapper.style.left = '-' + this.slideWidth * nextIndex + 'px';
     }
+    this.currentSlideIndex = nextIndex;
+  };
 
+  Carousel.prototype.goNext = function() {
+    var previousIndex = this.currentSlideIndex;
+    var nextIndex;
+
+    nextIndex = (previousIndex >= this.slides.length - 1) ? 0 : previousIndex + 1;
+    this.goToSlide(this.slides, nextIndex, previousIndex);
+  };
+
+  Carousel.prototype.goBack = function() {
+    var previousIndex = this.currentSlideIndex;
+    var nextIndex;
+
+    nextIndex = previousIndex <= 0 ? this.slides.length - 1 : previousIndex - 1;
+
+    this.goToSlide(this.slides, nextIndex, previousIndex);
   };
 
   function noop () {};

@@ -5,7 +5,7 @@
   var carousel = new Carousel(carouselContainer, {
     containerClass: 'slides-container',
     wrapperClass: 'slides-wrapper',
-    paginationClass: 'pagination-container'
+    paginationClass: 'pagination-container',
   });
 
 })();

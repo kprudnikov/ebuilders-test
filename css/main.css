@@ -99,9 +99,16 @@ button, input[type=submit] {
       -webkit-border-radius: 20px;
               border-radius: 20px;
       border: none;
-      cursor: pointer; }
-      .carousel-main-container > .pagination-container > .pagination-bullet.active {
-        background: #fff7ef; }
+      cursor: pointer;
+      -webkit-transition-duration: 0.5s;
+              transition-duration: 0.5s; }
+      .carousel-main-container > .pagination-container > .pagination-bullet.active, .carousel-main-container > .pagination-container > .pagination-bullet:hover {
+        background: #fff7ef;
+        -webkit-transition: ease;
+        transition: ease; }
+      .carousel-main-container > .pagination-container > .pagination-bullet:hover {
+        -webkit-box-shadow: 0 0 12px 0 #fff7ef;
+                box-shadow: 0 0 12px 0 #fff7ef; }
       .carousel-main-container > .pagination-container > .pagination-bullet + .pagination-bullet {
         margin-left: 8px; }
   .carousel-main-container .carousel-control {
@@ -116,9 +123,13 @@ button, input[type=submit] {
     background: #928c88;
     font-family: PT, sans-serif;
     font-size: 35px;
-    cursor: pointer; }
+    cursor: pointer;
+    -webkit-transition: 1s;
+    transition: 1s; }
     .carousel-main-container .carousel-control:hover {
-      background: #fff7ef; }
+      background: #fff7ef;
+      -webkit-transition: ease;
+      transition: ease; }
     .carousel-main-container .carousel-control.carousel-next {
       right: -35px;
       text-align: right;
