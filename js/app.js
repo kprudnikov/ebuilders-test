@@ -8,6 +8,12 @@
     paginationClass: 'pagination-container',
   });
 
+  var upButton = document.getElementById('up');
+
+  addEvent(upButton, 'click', function () {
+    scrollTo(0, 500);
+  });
+
   // validation
   var commentForm = document.getElementById('comment-form');
   var usernameField = document.getElementById('username');

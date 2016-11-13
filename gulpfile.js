@@ -31,8 +31,13 @@ gulp.task('copy', () => {
     .pipe(copy('css', {prefix: 1}));
 });
 
+gulp.task('copy-normalize',  () => {
+  return gulp.src('node_modules/normalize.css/normalize.css')
+    .pipe(copy('css', {prefix: 2}));
+})
+
 gulp.task('del', ['autoprefix'], () => {
   return del('sass/main.css');
 });
 
-gulp.task('default', ['sass', 'autoprefix', 'copy', 'del', 'watch']);
+gulp.task('default', ['sass', 'autoprefix', 'copy', 'copy-normalize', 'del', 'watch']);

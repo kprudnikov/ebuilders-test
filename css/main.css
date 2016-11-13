@@ -58,14 +58,36 @@
 body {
   background: #242020;
   color: #fff7ef;
-  font-family: Arial, sans-serif; }
+  font-family: Arial, sans-serif;
+  position: relative; }
 
 button, input[type=submit] {
   font-family: Arial, sans-serif; }
 
+.header {
+  background: #fff;
+  color: #242020; }
+  .header > .wrapper {
+    padding: 25px 0 30px;
+    width: 925px; }
+    .header > .wrapper > .logo {
+      float: left; }
+    .header > .wrapper > h1 {
+      font-family: PT, sans-serif;
+      font-size: 48px;
+      font-weight: 300;
+      float: right;
+      margin: 0;
+      line-height: 50px; }
+
+.main-wrapper {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  overflow: hidden; }
+
 .carousel-main-container {
   width: 806px;
-  padding: 60px 0; }
+  padding: 30px 0 60px; }
   .carousel-main-container > .slides-container {
     height: 539px;
     overflow: hidden;
@@ -119,7 +141,7 @@ button, input[type=submit] {
     position: absolute;
     height: 70px;
     width: 70px;
-    top: 270px;
+    top: 240px;
     behavior: url("./PIE.htc");
     -webkit-border-radius: 100%;
             border-radius: 100%;
@@ -145,16 +167,16 @@ button, input[type=submit] {
 
 .form-header {
   display: block;
-  padding: 35px 0;
+  padding: 30px 0;
   margin-bottom: 60px;
   background-color: #f78f20;
   background: -webkit-gradient(linear, left bottom, left top, from(#804b13), color-stop(5%, #f78f20), color-stop(95%, #f78f20), to(#804b13));
   background: -webkit-linear-gradient(bottom, #804b13 0%, #f78f20 5%, #f78f20 95%, #804b13 100%);
   background: linear-gradient(to top, #804b13 0%, #f78f20 5%, #f78f20 95%, #804b13 100%);
-  font-size: 40px;
-  line-height: 40px;
+  line-height: 48px;
   font-family: PT, sans-serif; }
   .form-header > .h3 {
+    font-size: 48px;
     font-weight: 300;
     margin: 0;
     letter-spacing: 0.5px; }
@@ -201,7 +223,7 @@ button, input[type=submit] {
     padding: 10px 20px;
     background: #3d3937;
     color: #fff7ef;
-    border: 1px solid #3d3937;
+    border: none;
     display: block;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
@@ -221,7 +243,7 @@ button, input[type=submit] {
       padding: 10px 20px;
       background: #3d3937;
       color: #fff7ef;
-      border: 1px solid #3d3937;
+      border: none;
       display: block;
       -webkit-box-sizing: border-box;
          -moz-box-sizing: border-box;
@@ -250,7 +272,7 @@ button, input[type=submit] {
   position: absolute;
   right: 0;
   bottom: 0;
-  height: 150px;
+  height: 140px;
   width: 140px;
   overflow: hidden; }
 
@@ -271,10 +293,55 @@ button, input[type=submit] {
   background: -webkit-gradient(linear, left top, left bottom, from(#4b4b4b), to(#312f2f));
   background: -webkit-linear-gradient(top, #4b4b4b 0%, #312f2f 100%);
   background: linear-gradient(to bottom, #4b4b4b 0%, #312f2f 100%);
+  cursor: pointer;
   z-index: 2; }
   .form-submit > span {
     position: absolute;
     left: 30%;
-    top: 30%; }
+    top: 35%; }
+
+.social-container {
+  position: absolute;
+  right: -10px;
+  top: 75px; }
+  .social-container > .social {
+    float: right;
+    clear: right;
+    display: block;
+    -webkit-transform: rotate(-15deg);
+        -ms-transform: rotate(-15deg);
+            transform: rotate(-15deg);
+    -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s; }
+    .social-container > .social:hover, .social-container > .social:focus {
+      -webkit-transform: rotate(0);
+          -ms-transform: rotate(0);
+              transform: rotate(0);
+      -webkit-transition: ease;
+      transition: ease; }
+    .social-container > .social + .social {
+      position: relative;
+      left: 5px;
+      top: -5px; }
+
+.nav {
+  position: absolute;
+  right: 0;
+  bottom: 0; }
+  .nav > button {
+    width: 130px;
+    height: 135px;
+    padding: 0;
+    -webkit-border-radius: 100% 0 0 0;
+            border-radius: 100% 0 0 0;
+    border: none;
+    background: #3d3937;
+    -webkit-box-shadow: 0 -2px 5px 0 #000;
+            box-shadow: 0 -2px 5px 0 #000;
+    overflow: hidden; }
+    .nav > button > img {
+      position: absolute;
+      left: 35%;
+      bottom: 0; }
 
 /*# sourceMappingURL=main.css.map */
