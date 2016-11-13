@@ -39,7 +39,7 @@
     <div class="form-header text-center">
       <h3 class="h3">Fill up the form below</h3>
     </div>
-    <form action="" novalidate class="contact-form block-center wrapper">
+    <form action="" novalidate class="contact-form block-center wrapper" id="comment-form">
       <div class="form-group clearfix">
         <div class="label-wrapper">
           <span class="label" id="username-label">username</span>
@@ -81,9 +81,11 @@
           </label>
         </div>
       </div>
-      <button type="submit" class="form-submit">
-        <span>Go</span>
-      </button>
+        <div class="submit-wrapper"> <!-- additional wrapper to fix Chrome issue -->
+          <button type="submit" class="form-submit">
+            <span>Go</span>
+          </button>
+        </div>
     </form>
   </main>
   <aside class="social-container">

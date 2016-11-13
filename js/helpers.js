@@ -88,3 +88,14 @@ function toggleClass (element, className) {
   'use strict';
 
 }
+
+function closestWithClass (element, className) {
+  'use strict';
+
+  var parent = element;
+  while (parent && !hasClass(parent, className)) {
+    parent = parent.parentNode;
+  }
+
+  return parent;
+}

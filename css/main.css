@@ -89,7 +89,7 @@ button, input[type=submit] {
   .carousel-main-container > .pagination-container {
     position: absolute;
     width: 100%;
-    bottom: 30px;
+    bottom: 25px;
     text-align: center; }
     .carousel-main-container > .pagination-container > .pagination-bullet {
       height: 20px;
@@ -101,7 +101,11 @@ button, input[type=submit] {
       border: none;
       cursor: pointer;
       -webkit-transition-duration: 0.5s;
-              transition-duration: 0.5s; }
+              transition-duration: 0.5s;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      padding: 0; }
       .carousel-main-container > .pagination-container > .pagination-bullet.active, .carousel-main-container > .pagination-container > .pagination-bullet:hover {
         background: #fff7ef;
         -webkit-transition: ease;
@@ -183,7 +187,16 @@ button, input[type=submit] {
 
 .input-wrapper {
   width: 68%;
-  position: relative; }
+  position: relative;
+  border: 1px solid #2e2a29;
+  behavior: url("./PIE.htc");
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  overflow: hidden; }
+  .input-wrapper.invalid {
+    border: 1px solid red; }
+  .input-wrapper.has-value > .placeholder {
+    display: none; }
   .input-wrapper > .form-input {
     padding: 10px 20px;
     background: #3d3937;
@@ -195,11 +208,7 @@ button, input[type=submit] {
             box-sizing: border-box;
     position: relative;
     width: 100%;
-    behavior: url("./PIE.htc");
-    -webkit-border-radius: 10px;
-            border-radius: 10px;
-    resize: none;
-    overflow: hidden; }
+    resize: none; }
     .input-wrapper > .form-input + .placeholder {
       position: absolute;
       top: 10px;
@@ -208,8 +217,6 @@ button, input[type=submit] {
       color: #5b5754; }
     .input-wrapper > .form-input:focus + .placeholder {
       display: none; }
-    .input-wrapper > .form-input.invalid {
-      border-color: red; }
     .input-wrapper > .form-input > select {
       padding: 10px 20px;
       background: #3d3937;
@@ -239,26 +246,32 @@ button, input[type=submit] {
   .input-wrapper > textarea {
     height: 150px; }
 
+.submit-wrapper-inner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 150px;
+  width: 140px;
+  overflow: hidden; }
+
 .form-submit {
   position: absolute;
-  right: -72px;
-  bottom: -60px;
   display: block;
   height: 195px;
   width: 200px;
+  padding: 0;
   text-transform: uppercase;
   -webkit-border-radius: 50%;
           border-radius: 50%;
-  border: none;
-  -webkit-box-shadow: 0 -2px 4px 0 #000;
-          box-shadow: 0 -2px 4px 0 #000;
+  border: 1px solid #000;
   text-align: left;
   font-size: 24px;
   color: #fff7ef;
   background: #4b4b4b;
   background: -webkit-gradient(linear, left top, left bottom, from(#4b4b4b), to(#312f2f));
   background: -webkit-linear-gradient(top, #4b4b4b 0%, #312f2f 100%);
-  background: linear-gradient(to bottom, #4b4b4b 0%, #312f2f 100%); }
+  background: linear-gradient(to bottom, #4b4b4b 0%, #312f2f 100%);
+  z-index: 2; }
   .form-submit > span {
     position: absolute;
     left: 30%;

@@ -44,7 +44,7 @@ button, input[type=submit] {
   & > .pagination-container {
     position: absolute;
     width: 100%;
-    bottom: 30px;
+    bottom: 25px;
     text-align: center;
 
     & > .pagination-bullet {
@@ -55,6 +55,8 @@ button, input[type=submit] {
       border: none;
       cursor: pointer;
       transition-duration: 0.5s;
+      box-sizing: border-box;
+      padding: 0;
 
       &.active, &:hover {
         background: $colorLight;
@@ -150,6 +152,9 @@ button, input[type=submit] {
 .input-wrapper {
   width: 68%;
   position: relative;
+  border: 1px solid $inputBorderColor;
+  @include border-radius(10px);
+  overflow: hidden;
 
   @mixin input-style () {
     padding: 10px 20px;
@@ -160,14 +165,20 @@ button, input[type=submit] {
     box-sizing: border-box;
   }
 
+  &.invalid {
+    border: 1px solid red;
+  }
+
+  &.has-value > .placeholder{
+    display: none;
+  }
+
   & > .form-input {
     @include input-style();
 
     position: relative;
     width: 100%;
-    @include border-radius(10px);
     resize: none;
-    overflow: hidden;
 
     & + .placeholder {
       position: absolute;
@@ -179,10 +190,6 @@ button, input[type=submit] {
 
     &:focus + .placeholder {
       display: none;
-    }
-
-    &.invalid {
-      border-color: red;
     }
 
     & > select {
@@ -215,22 +222,30 @@ button, input[type=submit] {
   }
 } // input-wrapper
 
+.submit-wrapper-inner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 150px;
+  width: 140px;
+  overflow: hidden;
+}
+
 .form-submit {
   position: absolute;
-  right: -72px;
-  bottom: -60px;
   display: block;
   height: 195px;
   width: 200px;
+  padding: 0;
   text-transform: uppercase;
   border-radius: 50%;
-  border: none;
-  box-shadow: 0 -2px 4px 0 #000;
+  border: 1px solid #000;
   text-align: left;
   font-size: $fontSize;
   color: $colorLight;
   background: $submitColorFrom;
   background: linear-gradient(to bottom, $submitColorFrom 0%, $submitColorTo 100%);
+  z-index: 2;
 
   & > span {
     position: absolute;
