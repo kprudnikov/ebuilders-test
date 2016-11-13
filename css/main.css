@@ -246,7 +246,7 @@ button, input[type=submit] {
   .input-wrapper > textarea {
     height: 150px; }
 
-.submit-wrapper-inner {
+.submit-wrapper {
   position: absolute;
   right: 0;
   bottom: 0;

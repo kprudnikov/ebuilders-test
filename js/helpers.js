@@ -99,3 +99,7 @@ function closestWithClass (element, className) {
 
   return parent;
 }
+
+function preventDefault (event) {
+  event.preventDefault ? event.preventDefault() : event.returnValue = false;
+}

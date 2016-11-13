@@ -67,10 +67,9 @@
       }
     });
 
-    if (!isFormValid) {
-      event.preventDefault();
-    } else {
-      event.preventDefault();
+    preventDefault(event);
+
+    if (isFormValid) {
       alert('Form is valid, let\'s submit it!');
     }
   });
