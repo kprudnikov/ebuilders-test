@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <header class="header">
+  <div class="header" role="header">
     <div class="wrapper block-center clearfix">
       <img src="img/logo-ebuilders.png" alt="eBuilders logo" class="logo">
       <h1 class="title">ebuilders test task</h1>
     </div>
-  </header>
+  </div>
   <div class="page-width block-center wrapper main-wrapper">
     <div id="carousel" class="carousel-main-container wrapper block-center">
       <button class="carousel-control carousel-prev" title="Go to next slide">
@@ -37,80 +37,79 @@
           </li>
         </ul>
       </div>
-      <div class="pagination-container"></div>
+      <div class="pagination-container" role="navigation"></div>
     </div>
 
-  <main id="contact" class="page-width">
-    <div class="form-header text-center">
-      <h3 class="h3">Fill up the form below</h3>
+    <main id="contact" class="page-width" role="main">
+      <div class="form-header text-center">
+        <h3 class="h3">Fill up the form below</h3>
+      </div>
+      <form action="" novalidate class="contact-form block-center wrapper" id="comment-form">
+        <div class="form-group clearfix">
+          <div class="label-wrapper">
+            <span class="label" id="username-label">username</span>
+          </div>
+          <div class="input-wrapper">
+            <input type="text" name="username" id="username" class="form-input" aria-labelledby="username-label">
+            <label class="placeholder" for="username">enter your username</label>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <div class="label-wrapper">
+            <span class="label" id="email-label">email</span>
+          </div>
+          <div class="input-wrapper">
+            <input type="email" name="email" id="email" class="form-input" aria-labelledby="email-label">
+            <label class="placeholder" for="email">enter your email</label>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <div class="label-wrapper">
+            <span class="label" id="comment-label">comment</span>
+          </div>
+          <div class="input-wrapper">
+            <textarea name="comment" id="comment" class="form-input" aria-labelledby="comment-label"></textarea>
+            <label class="placeholder" for="comment">enter your comment</label>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <div class="label-wrapper">
+            <span id="gender-label">gender</span>
+            <!-- here we should probably use bootstraps technique: hide original select and replace it with a number of divs acting as buttons, but let's keep it as is for now-->
+          </div>
+          <div class="input-wrapper">
+            <label for="gender" class="form-input input-select">
+              <select name="gender" id="gender" name="gender" class="form-input" aria-labelledby="gender-label">
+                <option value="1" selected>male</option>
+                <option value="2">female</option>
+              </select>
+            </label>
+          </div>
+        </div>
+          <div class="submit-wrapper"> <!-- additional wrapper to fix Chrome issue -->
+            <button type="submit" class="form-submit">
+              <span>Go</span>
+            </button>
+          </div>
+      </form>
+    </main>
+    <div class="social-container" role="complementary">
+      <a href="http://facebook.com" class="social" title="Go to Facebook page">
+        <img src="img/logo-fb.png" alt="Facebook logo">
+        <span class="sr-only">Go to Facebook page</span>
+      </a>
+      <a href="http://twitter.com" class="social" title="Go to twitter page">
+        <img src="img/logo-twitter.png" alt="Twitter logo">
+        <span class="sr-only">Go to twitter page</span>
+      </a>
     </div>
-    <form action="" novalidate class="contact-form block-center wrapper" id="comment-form">
-      <div class="form-group clearfix">
-        <div class="label-wrapper">
-          <span class="label" id="username-label">username</span>
-        </div>
-        <div class="input-wrapper">
-          <input type="text" name="username" id="username" class="form-input" aria-labelledby="username-label">
-          <label class="placeholder" for="username">enter your username</label>
-        </div>
-      </div>
-      <div class="form-group clearfix">
-        <div class="label-wrapper">
-          <span class="label" id="email-label">email</span>
-        </div>
-        <div class="input-wrapper">
-          <input type="email" name="email" id="email" class="form-input" aria-labelledby="email-label">
-          <label class="placeholder" for="email">enter your email</label>
-        </div>
-      </div>
-      <div class="form-group clearfix">
-        <div class="label-wrapper">
-          <span class="label" id="comment-label">comment</span>
-        </div>
-        <div class="input-wrapper">
-          <textarea name="comment" id="comment" class="form-input" aria-labelledby="comment-label"></textarea>
-          <label class="placeholder" for="comment">enter your comment</label>
-        </div>
-      </div>
-      <div class="form-group clearfix">
-        <div class="label-wrapper">
-          <span id="gender-label">gender</span>
-          <!-- here we should probably use bootstraps technique: hide original select and replace it with a number of divs acting as buttons, but let's keep it as is for now-->
-        </div>
-        <div class="input-wrapper">
-          <label for="gender" class="form-input input-select">
-            <select name="gender" id="gender" name="gender" class="form-input" aria-labelledby="gender-label">
-              <option value="1" selected>male</option>
-              <option value="2">female</option>
-            </select>
-          </label>
-        </div>
-      </div>
-        <div class="submit-wrapper"> <!-- additional wrapper to fix Chrome issue -->
-          <button type="submit" class="form-submit">
-            <span>Go</span>
-          </button>
-        </div>
-    </form>
-  </main>
-  <aside class="social-container">
-    <a href="http://facebook.com" class="social" title="Go to Facebook page">
-      <img src="img/logo-fb.png" alt="Facebook logo">
-      <span class="sr-only">Go to Facebook page</span>
-    </a>
-    <a href="http://twitter.com" class="social" title="Go to twitter page">
-      <img src="img/logo-twitter.png" alt="Twitter logo">
-      <span class="sr-only">Go to twitter page</span>
-    </a>
-  </aside>
-  <nav class="nav">
-    <button id="up" title="Back to top">
-      <img src="img/back-to-top.gif" alt="Arrow up" role="presentation" aria-hidden="true">
-      <span class="sr-only">Back to top</span>
-    </button>
-  </nav>
+    <div class="nav" role="navigation">
+      <button id="up" title="Back to top">
+        <img src="img/back-to-top.gif" alt="Arrow up" role="presentation" aria-hidden="true">
+        <span class="sr-only">Back to top</span>
+      </button>
+    </div>
   </div>
-
   <script type="text/javascript" src="js/polyfills.js"></script>
   <script type="text/javascript" src="js/helpers.js"></script>
   <script type="text/javascript" src="js/carousel.js"></script>

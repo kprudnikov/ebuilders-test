@@ -338,7 +338,8 @@ button, input[type=submit] {
     background: #3d3937;
     -webkit-box-shadow: 0 -2px 5px 0 #000;
             box-shadow: 0 -2px 5px 0 #000;
-    overflow: hidden; }
+    overflow: hidden;
+    cursor: pointer; }
     .nav > button > img {
       position: absolute;
       left: 35%;

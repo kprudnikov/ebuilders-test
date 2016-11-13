@@ -3,7 +3,6 @@ const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 
-// const concat = require('gulp-concat');
 const watch = require('gulp-watch');
 const del = require('del');
 const copy = require('gulp-copy');

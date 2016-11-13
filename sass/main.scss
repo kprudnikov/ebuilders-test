@@ -36,7 +36,6 @@ button, input[type=submit] {
   }
 }
 
-
 .main-wrapper {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -330,6 +329,7 @@ button, input[type=submit] {
     background: $inputBackgroundColor;
     box-shadow: 0 -2px 5px 0 #000;
     overflow: hidden;
+    cursor: pointer;
 
     & > img {
       position: absolute;

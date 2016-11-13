@@ -1,6 +1,7 @@
 (function () {
   'use strict';
 
+  // carousel
   var carouselContainer = document.getElementById('carousel');
   var carousel = new Carousel(carouselContainer, {
     containerClass: 'slides-container',
@@ -8,6 +9,7 @@
     paginationClass: 'pagination-container',
   });
 
+  // screen scroll
   var upButton = document.getElementById('up');
 
   addEvent(upButton, 'click', function () {
