@@ -1,26 +1,25 @@
 var validate = (function () {
   'use strict';
 
- // {value: [string|number],
- //  node: [HTMLnode]
+ // {value: '[string|number]',
+ //  node: '[HTMLnode]',
  //  rules: [{
- //   key: 'required',
- //   message: 'This field is required'
- // },
- // {
- //   key: 'email',
- //   message: 'Please enter valid email'
- // },
- // {
- //   key: minlength,
- //   value: 5,
- //   message: 'Should be at least 5 symbols'
- // }
+ //    key: 'required',
+ //    message: 'This field is required'
+ //  },
+ //  {
+ //    key: 'email',
+ //    message: 'Please enter valid email'
+ //  },
+ //  {
+ //    key: minlength,
+ //    value: 5,
+ //    message: 'Should be at least 5 symbols'
+ //  }
  // ]}
 
   return function validate (data) {
     var value = data.value;
-    var isValid = true;
     var result = {
       valid: true
     };

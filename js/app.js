@@ -58,7 +58,7 @@
         key: 'required',
         message: requiredMessage
       }]
-    })
+    });
 
     data.forEach(function (field) {
       var validationResult = validate(field);
